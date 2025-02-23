@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { ThemeContext } from "../context/ThemeContext"; // ✅ Import Theme Context
+import { ThemeContext } from "../context/ThemeContext"; 
+import { API_BASE_URL } from "../config"; // ✅ Import backend URL
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -8,12 +9,12 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
   const token = localStorage.getItem("token");
-  const { darkMode } = useContext(ThemeContext); // ✅ Get Dark Mode state
+  const { darkMode } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/profile/me", {
+        const response = await axios.get(`${API_BASE_URL}/api/auth/profile/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -32,7 +33,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       await axios.put(
-        "http://localhost:5000/api/auth/profile",
+        `${API_BASE_URL}/api/auth/profile`,
         { name, bio, avatar },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -58,7 +59,7 @@ const Profile = () => {
               <img
                 src={avatar || "/default-avatar.png"}
                 alt="Profile"
-                className="w-full h-full rounded-full border-4 border-gray-300"
+                className="w-full h-full rounded-full border-4 border-gray-300 object-cover"
               />
             </div>
             <h3 className="text-2xl font-medium mt-4">{user.name}</h3>

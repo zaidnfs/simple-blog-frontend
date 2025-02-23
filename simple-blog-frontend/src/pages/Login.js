@@ -1,24 +1,26 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../context/ThemeContext"; // ✅ Import Theme Context
+import { ThemeContext } from "../context/ThemeContext"; 
+import { API_BASE_URL } from "../config"; // ✅ Import backend URL
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { darkMode } = useContext(ThemeContext); // ✅ Get Dark Mode state
+  const { darkMode } = useContext(ThemeContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
         password,
       });
+
       localStorage.setItem("token", response.data.token);
       navigate("/");
     } catch (err) {

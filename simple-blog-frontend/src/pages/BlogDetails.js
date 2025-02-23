@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../context/ThemeContext"; // ✅ Import Theme Context
+import API_BASE_URL from "../config"; // ✅ Import API Base URL
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/blogs/${id}`);
         setBlog(response.data);
       } catch (error) {
         console.error("Error fetching blog:", error);
@@ -22,7 +23,7 @@ const BlogDetails = () => {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${id}/comments`);
+        const response = await axios.get(`${API_BASE_URL}/api/blogs/${id}/comments`);
         setComments(response.data);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -43,7 +44,7 @@ const BlogDetails = () => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/blogs/${id}/comments`,
+        `${API_BASE_URL}/api/blogs/${id}/comments`,
         { text: comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );

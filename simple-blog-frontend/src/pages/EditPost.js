@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ThemeContext } from "../context/ThemeContext"; // ✅ Import Theme Context
+import { ThemeContext } from "../context/ThemeContext"; 
+import { API_BASE_URL } from "../config"; // Import backend URL
 
 const EditPost = () => {
   const { id } = useParams();
@@ -9,12 +10,12 @@ const EditPost = () => {
   const [content, setContent] = useState("");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const { darkMode } = useContext(ThemeContext); // ✅ Get Dark Mode state
+  const { darkMode } = useContext(ThemeContext); 
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/blogs/${id}`);
         setTitle(response.data.title);
         setContent(response.data.content);
       } catch (error) {
@@ -35,7 +36,7 @@ const EditPost = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/blogs/${id}`,
+        `${API_BASE_URL}/api/blogs/${id}`, // Using backend URL from config
         { title, content },
         {
           headers: { Authorization: `Bearer ${token}` },

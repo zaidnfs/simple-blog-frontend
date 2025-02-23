@@ -15,9 +15,9 @@ const App = () => {
   return (
     <ThemeProvider> {/* ✅ Wrap app in ThemeProvider */}
       <Router>
-        <div className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-all duration-300">
           <Header />
-          <main className="flex-grow">
+          <main className="flex-1 w-full max-w-6xl mx-auto px-6">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/blogs/:id" element={<BlogDetails />} />

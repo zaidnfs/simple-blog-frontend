@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../context/ThemeContext"; // ✅ Import Theme Context
+import { ThemeContext } from "../context/ThemeContext"; 
+import { API_BASE_URL } from "../config"; // ✅ Import backend URL
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,17 +10,17 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { darkMode } = useContext(ThemeContext); // ✅ Get Dark Mode state
+  const { darkMode } = useContext(ThemeContext); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", {
+      await axios.post(`${API_BASE_URL}/api/auth/signup`, {
         name,
         email,
         password,
       });
-      navigate("/login"); // Redirect to login after signup
+      navigate("/login"); 
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed. Please try again.");
     }

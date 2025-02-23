@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../context/ThemeContext"; // ✅ Import Theme Context
+import API_BASE_URL from "../config"; // ✅ Import API Base URL
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -11,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/blogs");
+        const response = await axios.get(`${API_BASE_URL}/api/blogs`);
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -30,7 +31,7 @@ const Home = () => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/blogs/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/blogs/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
@@ -44,7 +45,6 @@ const Home = () => {
 
   return (
     <div className={`min-h-screen w-full transition-all duration-300 flex flex-col items-center justify-center ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-900"}`}>
-      
       {/* ✅ Floating "New Post" Button (Always Visible) */}
       {token && (
         <Link
