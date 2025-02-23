@@ -1,3 +1,2 @@
-const API_BASE_URL = "https://simple-blog-backend-isds.onrender.com"; // Replace with your actual Render backend URL
-
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export default API_BASE_URL;

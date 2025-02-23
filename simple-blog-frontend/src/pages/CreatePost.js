@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext"; 
-import { API_BASE_URL } from "../config"; // Import backend URL
+import  API_BASE_URL  from "../config"; // Import backend URL
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../context/ThemeContext"; 
-import { API_BASE_URL } from "../config"; // Import backend URL
+import  API_BASE_URL  from "../config"; // Import backend URL
 
 const EditPost = () => {
   const { id } = useParams();
