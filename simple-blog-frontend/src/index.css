@@ -6,6 +6,6 @@ body, html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #051f20; /* Ensures full dark theme */
+    background-color: white; /* Ensures full dark theme */
   }
   
